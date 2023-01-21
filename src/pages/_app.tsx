@@ -1,6 +1,12 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import SideNav from '../componants/sidenav'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <div className="relative">
+      <SideNav />
+      <Component {...pageProps} />
+    </div>
+  )
 }
