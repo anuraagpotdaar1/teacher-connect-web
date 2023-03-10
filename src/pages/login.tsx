@@ -11,7 +11,7 @@ const LoginForm = () => {
         e.preventDefault()
         // Perform login logic here
         console.log(email, password)
-        router.push('/home')
+        router.push('/dashboard')
     }
 
     return (

@@ -6,7 +6,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className="relative">
       <SideNav />
-      <Component {...pageProps} />
+      <div className="ml-64 pt-4">
+        <Component {...pageProps} />
+      </div>
     </div>
   )
 }
