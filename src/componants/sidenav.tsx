@@ -28,15 +28,14 @@ const SideNav = () => {
     if (router.pathname === '/login') return null;
 
     return (
-        <aside className="bg-gray-800 h-screen w-64 fixed top-0 left-0 py-4 px-6">
+        <aside className="bg-indigo-50 h-screen w-64 fixed top-0 left-0 py-4 px-6">
             <nav>
-                <ul className="text-white">
+                <ul className="text-indigo-800 font-bold text-lg">
                     {menuItems.map((menuItem) => (
                         <li
                             key={menuItem.href}
-                            className={router.pathname === menuItem.href ? 'bg-indigo-500' : ''}
-                        >
-                            <Link href={menuItem.href} className="block p-2 hover:bg-indigo-500">
+                            className={router.pathname === menuItem.href ? 'bg-indigo-300 rounded-lg' : ''}>
+                            <Link href={menuItem.href} className="block p-2 mt-3 px-3 rounded-lg hover:bg-indigo-200">
                                 {menuItem.title}
                             </Link>
                         </li>
@@ -44,6 +43,8 @@ const SideNav = () => {
                 </ul>
             </nav>
         </aside>
+
+
     );
 };
 
