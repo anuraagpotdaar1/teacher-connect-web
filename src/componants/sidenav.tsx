@@ -9,8 +9,8 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
     {
-        href: '/dashboard',
-        title: 'Dashboard',
+        href: '/home',
+        title: 'Home',
     },
     {
         href: '/requests',
