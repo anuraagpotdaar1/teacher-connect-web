@@ -34,8 +34,8 @@ const SideNav = () => {
                     {menuItems.map((menuItem) => (
                         <li
                             key={menuItem.href}
-                            className={router.pathname === menuItem.href ? 'bg-indigo-300 rounded-lg' : ''}>
-                            <Link href={menuItem.href} className="block p-2 mt-3 px-3 rounded-lg hover:bg-indigo-200">
+                            className={router.pathname === menuItem.href ? 'bg-indigo-200 rounded-lg' : ''}>
+                            <Link href={menuItem.href} className="block p-2 mt-3 px-3 rounded-lg hover:bg-indigo-100">
                                 {menuItem.title}
                             </Link>
                         </li>
