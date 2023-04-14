@@ -1,34 +1,72 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { FormContext } from './FormContext';
 
-type StepProps = {
-  formData: any;
-  onSubmit: (formData: any) => void;
-};
+const Step1: React.FC = () => {
+  const { values, setValues } = useContext(FormContext);
 
-const Step1: React.FC<StepProps> = ({ formData, onSubmit }) => {
-  const [name, setName] = useState(formData.name || '');
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    onSubmit({ name: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({ [name]: value });
   };
 
   return (
-    <form>
+    <div>
       <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-          Name
-        </label>
+        <label htmlFor="field1" className="block mb-2">Field 1:</label>
         <input
-          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name"
+          id="field1"
+          name="field1"
           type="text"
-          value={name}
-          onChange={handleNameChange}
-          required
+          value={values.field1}
+          onChange={handleChange}
+          className="border border-gray-300 p-2 w-full"
         />
       </div>
-    </form>
+      <div className="mb-4">
+        <label htmlFor="field2" className="block mb-2">Field 2:</label>
+        <input
+          id="field2"
+          name="field2"
+          type="text"
+          value={values.field2}
+          onChange={handleChange}
+          className="border border-gray-300 p-2 w-full"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="field3" className="block mb-2">Field 3:</label>
+        <input
+          id="field3"
+          name="field3"
+          type="text"
+          value={values.field3}
+          onChange={handleChange}
+          className="border border-gray-300 p-2 w-full"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="field4" className="block mb-2">Field 4:</label>
+        <input
+          id="field4"
+          name="field4"
+          type="text"
+          value={values.field4}
+          onChange={handleChange}
+          className="border border-gray-300 p-2 w-full"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="field5" className="block mb-2">Field 5:</label>
+        <input
+          id="field5"
+          name="field5"
+          type="text"
+          value={values.field5}
+          onChange={handleChange}
+          className="border border-gray-300 p-2 w-full"
+        />
+      </div>
+    </div>
   );
 };
 

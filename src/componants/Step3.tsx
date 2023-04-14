@@ -1,20 +1,20 @@
 import { useContext } from 'react';
 import { FormContext } from './FormContext';
 
-const Step2: React.FC = () => {
+const Step3: React.FC = () => {
   const { values, setValues } = useContext(FormContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ step2: e.target.value });
+    setValues({ step3: e.target.value });
   };
 
   return (
     <div>
-      <label htmlFor="step2">Step 1:</label>
+      <label htmlFor="step3">Step 1:</label>
       <input
-        id="step2"
+        id="step3"
         type="text"
-        value={values.step2}
+        value={values.step3}
         onChange={handleChange}
         className="border border-gray-300 p-2"
       />
@@ -22,4 +22,4 @@ const Step2: React.FC = () => {
   );
 };
 
-export default Step2;
+export default Step3;

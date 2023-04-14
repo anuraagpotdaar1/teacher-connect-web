@@ -1,79 +1,64 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { FormContext } from './FormContext';
+import { initialValues } from './formTypes';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
 
-type Step = {
-  label: string;
-  component: React.FC<StepProps>;
+const steps = [
+    { key: 'step1', component: <Step1 /> },
+    { key: 'step2', component: <Step2 /> },
+    { key: 'step3', component: <Step3 /> },
+];
+
+const MultiStepForm: React.FC = () => {
+    const [currentStep, setCurrentStep] = useState(0);
+    const { values, setValues } = useContext(FormContext);
+
+    const next = () => {
+        setCurrentStep(currentStep + 1);
+    };
+
+    const back = () => {
+        setCurrentStep(currentStep - 1);
+    };
+
+    const submit = () => {
+        console.log('Form submitted:', values);
+        setValues(initialValues);
+    };
+
+    return (
+        <div className="w-full max-w-md mx-auto">
+            <div className="mb-4">
+                <div>Step {currentStep + 1} of {steps.length}</div>
+                <div className="h-2 bg-gray-200 mt-2">
+                    <div className="h-2 bg-blue-500" style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}></div>
+                </div>
+            </div>
+
+            <div>{steps[currentStep].component}</div>
+
+            <div className="flex justify-between mt-4">
+                {currentStep > 0 && (
+                    <button onClick={back} className="bg-gray-500 text-white px-4 py-2">
+                        Back
+                    </button>
+                )}
+                {currentStep < steps.length - 1 && (
+                    <button onClick={next} className="bg-blue-500 text-white px-4 py-2">
+                        Next
+                    </button>
+                )}
+                {currentStep === steps.length - 1 && (
+                    <button onClick={submit} className="bg-green-500 text-white px-4 py-2">
+                        Submit
+                    </button>
+                )}
+            </div>
+        </div>
+    );
 };
-
-type StepProps = {
-  formData: any;
-  onSubmit: (formData: any) => void;
-};
-
-
-type MultiStepFormProps = {
-  steps: Step[];
-};
-
-const MultiStepForm: React.FC<MultiStepFormProps> = ({ steps }) => {
-  const [step, setStep] = useState(0);
-  const [formData, setFormData] = useState({});
-
-  const handleFormSubmit = (data: any) => {
-    setFormData({ ...formData, ...data });
-    if (step < steps.length - 1) {
-      setStep(step + 1);
-    } else {
-      console.log('Form submitted:', formData);
-    }
-  };
-
-  const CurrentStep = steps[step].component;
-
-  return (
-    <div>
-      <ul className="flex mb-4">
-        {steps.map((s, i) => (
-          <li
-            key={s.label}
-            className={`flex-1 text-center ${i === step ? 'font-bold' : 'text-gray-600'
-              }`}
-          >
-            {s.label}
-          </li>
-        ))}
-      </ul>
-      <div className="mb-8">
-        <CurrentStep formData={formData} onSubmit={handleFormSubmit} />
-      </div>
-      <div className="text-center">
-        {step > 0 && (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-            onClick={() => setStep(step - 1)}
-          >
-            Back
-          </button>
-        )}
-        {step === steps.length - 1 ? (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => console.log(formData)}
-          >
-            Submit
-          </button>
-        ) : (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => setStep(step + 1)}
-          >
-            Next
-          </button>
-        )}
-      </div>
-    </div>
-  );
-};
-
 
 export default MultiStepForm;
+

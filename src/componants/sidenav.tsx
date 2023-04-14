@@ -17,6 +17,10 @@ const menuItems: MenuItem[] = [
         title: 'Requests',
     },
     {
+        href: '/DataMigration',
+        title: 'Data Migration',
+    },
+    {
         href: '/settings',
         title: 'Settings',
     },
