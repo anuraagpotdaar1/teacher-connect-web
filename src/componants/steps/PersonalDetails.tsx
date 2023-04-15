@@ -9,9 +9,15 @@ const PersonalDetails: React.FC = () => {
     setValues({ [name]: value });
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setValues({ [name]: value });
+  };
+
   return (
     <form className='max-w-md '>
       <h1 className="block text-2xl font-bold text-gray-700">Personal details of {values.f_name}</h1>
+
       {/* Name section */}
       <div className="my-10 grid grid-flow-col auto-cols-max gap-12">
         <div className='w-96'>
@@ -75,16 +81,16 @@ const PersonalDetails: React.FC = () => {
         </div>
         <div className='w-96'>
           <label htmlFor="blood_group" className="block mb-2 text-base font-bold text-gray-700">Blood group</label>
-          <select name="blood-group" id="blood-group" className="border border-black rounded p-2 focus:outline-blue-500 w-full">
-            <option value="" disabled selected>Select</option>
-            <option value={values.blood_group}>A+</option>
-            <option value={values.blood_group}>A-</option>
-            <option value={values.blood_group}>B+</option>
-            <option value={values.blood_group}>B-</option>
-            <option value={values.blood_group}>AB+</option>
-            <option value={values.blood_group}>AB-</option>
-            <option value={values.blood_group}>O+</option>
-            <option value={values.blood_group}>O-</option>
+          <select name="blood_group" id="blood_group" value={values.blood_group} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 w-full">
+            <option value="" disabled>Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
           </select>
         </div>
       </div>
@@ -93,13 +99,13 @@ const PersonalDetails: React.FC = () => {
       <div className="my-10 grid grid-flow-col auto-cols-max gap-12">
         <div className='w-96'>
           <label htmlFor="religion" className="block mb-2 text-base font-bold text-gray-700">Religion</label>
-          <select name="religion" id="religion" className="border border-black rounded p-2 focus:outline-blue-500 w-full">
-            <option value="" disabled selected>Select</option>
-            <option value={values.religion}>Hindu</option>
-            <option value={values.religion}>Muslim</option>
-            <option value={values.religion}>Christian</option>
-            <option value={values.religion}>Buddhist</option>
-            <option value={values.religion}>Sikh</option>
+          <select name="religion" id="religion" value={values.religion} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 w-full">
+            <option value="" disabled>Select</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Muslim">Muslim</option>
+            <option value="Christian">Christian</option>
+            <option value="Buddhish">Buddhist</option>
+            <option value="Sikh">Sikh</option>
           </select>
         </div>
         <div className='w-96'>
@@ -119,18 +125,18 @@ const PersonalDetails: React.FC = () => {
       <div className="my-10 grid grid-flow-col auto-cols-max gap-12">
         <div className='w-96'>
           <label htmlFor="gender" className="block mb-2 text-base font-bold text-gray-700">Gender</label>
-          <select name="gender" id="gender" className="border border-black rounded p-2 focus:outline-blue-500 w-full ">
-            <option value="" disabled selected>Select</option>
-            <option value={values.gender}>Male</option>
-            <option value={values.gender}>Female</option>
+          <select name="gender" id="gender" value={values.gender} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 w-full ">
+            <option value="" disabled>Select</option>
+            <option value="Male">Male</option>
+            <option value="female">Female</option>
           </select>
         </div>
         <div className='w-96'>
           <label htmlFor="disability" className="block mb-2 text-base font-bold text-gray-700">Physical disability</label>
-          <select name="disability" id="disability" className="border border-black rounded p-2 focus:outline-blue-500 w-full">
-            <option value="" disabled selected>Select</option>
-            <option value={values.disability}>Yes</option>
-            <option value={values.disability}>No</option>
+          <select name="disability" id="disability" value={values.disability} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 w-full">
+            <option value="" disabled>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
           </select>
         </div>
       </div>
@@ -138,12 +144,12 @@ const PersonalDetails: React.FC = () => {
       {/* Marital section */}
       <div className='my-10'>
         <label htmlFor="marital_status" className="block mb-2 text-base font-bold text-gray-700">Marital Status</label>
-        <select name="marital_status" id="marital_status" className="border border-black rounded p-2 focus:outline-blue-500 flex w-full">
-          <option value="" disabled selected>Select</option>
-          <option value={values.marital_status}>Single</option>
-          <option value={values.marital_status}>Married</option>
-          <option value={values.marital_status}>Widowed</option>
-          <option value={values.marital_status}>Divorced</option>
+        <select name="marital_status" id="marital_status" value={values.marital_status} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full">
+          <option value="" disabled>Select</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Widowed">Widowed</option>
+          <option value="Divorced">Divorced</option>
         </select>
       </div>
 

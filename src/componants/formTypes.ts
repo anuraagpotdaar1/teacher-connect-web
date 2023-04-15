@@ -1,4 +1,27 @@
-export interface FormValues {
+const numOfInstitutes = 3;
+
+type InstituteProperties = {
+  [key: string]: string;
+};
+
+const generateInstituteProperties = (numOfInstitutes: number): InstituteProperties => {
+  let properties: InstituteProperties = {};
+
+  for (let i = 1; i <= numOfInstitutes; i++) {
+    properties[`institute_name_${i}`] = '';
+    properties[`doj_${i}`] = '';
+    properties[`dol_${i}`] = '';
+    properties[`post_${i}`] = '';
+    properties[`subject_${i}`] = '';
+    properties[`starting_salary_${i}`] = '';
+    properties[`ending_salary_${i}`] = '';
+    properties[`remark_${i}`] = '';
+  }
+
+  return properties;
+};
+
+type BasicFormValues = {
   f_name: string;
   m_name: string;
   surname: string;
@@ -29,35 +52,13 @@ export interface FormValues {
   grad_field: string;
 
   behaviour: string;
+};
 
-  institute_name_1: string;
-  doj_1: string;
-  dol_1: string;
-  post_1: string;
-  subject_1: string;
-  starting_salary_1: string;
-  ending_salary_1: string;
-  remark_1: string;
+type DynamicInstituteFormValues = {
+  [P in keyof ReturnType<typeof generateInstituteProperties>]: string;
+};
 
-  institute_name_2: string;
-  doj_2: string;
-  dol_2: string;
-  post_2: string;
-  subject_2: string;
-  starting_salary_2: string;
-  ending_salary_2: string;
-  remark_2: string;
-
-  institute_name_3: string;
-  doj_3: string;
-  dol_3: string;
-  post_3: string;
-  subject_3: string;
-  starting_salary_3: string;
-  ending_salary_3: string;
-  remark_3: string;
-
-}
+export type FormValues = BasicFormValues & DynamicInstituteFormValues;
 
 export const initialValues: FormValues = {
   f_name: '',
@@ -91,30 +92,6 @@ export const initialValues: FormValues = {
 
   behaviour: '',
 
-  institute_name_1: '',
-  doj_1: '',
-  dol_1: '',
-  post_1: '',
-  subject_1: '',
-  starting_salary_1: '',
-  ending_salary_1: '',
-  remark_1: '',
-
-  institute_name_2: '',
-  doj_2: '',
-  dol_2: '',
-  post_2: '',
-  subject_2: '',
-  starting_salary_2: '',
-  ending_salary_2: '',
-  remark_2: '',
-
-  institute_name_3: '',
-  doj_3: '',
-  dol_3: '',
-  post_3: '',
-  subject_3: '',
-  starting_salary_3: '',
-  ending_salary_3: '',
-  remark_3: '',
+  // Use the spread operator to add the generated properties to the initialValues object
+  ...generateInstituteProperties(numOfInstitutes),
 };

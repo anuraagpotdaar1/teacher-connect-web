@@ -22,10 +22,12 @@ interface FormProviderProps {
 
 export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
     const [values, setValues] = useState<FormValues>(initialValues);
-
+    
     const updateValues = (newValues: Partial<FormValues>) => {
-        setValues({ ...values, ...newValues });
+        setValues((prevValues: FormValues) => ({ ...prevValues, ...newValues } as FormValues));
     };
+
+
 
     return (
         <FormContext.Provider value={{ values, setValues: updateValues }}>

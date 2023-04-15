@@ -9,6 +9,11 @@ const ContactDetails: React.FC = () => {
     setValues({ [name]: value });
   };
 
+  const handleTeaxtAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setValues({ [name]: value });
+  }
+
   return (
     <form>
       <h1 className="block text-2xl font-bold text-gray-700">Contact details of {values.f_name}</h1>
@@ -52,10 +57,9 @@ const ContactDetails: React.FC = () => {
         <textarea
           id="address"
           name="address"
-          type="text"
           rows={4}
           value={values.address}
-          onChange={handleChange}
+          onChange={handleTeaxtAreaChange}
           className="border border-black rounded p-2 focus:outline-blue-500 resize-none w-full"
         />
       </div>
