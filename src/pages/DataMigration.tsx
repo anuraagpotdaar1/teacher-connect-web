@@ -4,9 +4,9 @@ import MultiStepForm from '../componants/MultiStepForm';
 const FormPage: React.FC = () => {
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl mb-4">Data Migration</h1>
+      <h1 className="text-3xl text-indigo-800 font-bold mb-4">Data Migration</h1>
       <FormProvider>
-        <MultiStepForm />
+        <MultiStepForm/>
       </FormProvider>
     </div>
   );
