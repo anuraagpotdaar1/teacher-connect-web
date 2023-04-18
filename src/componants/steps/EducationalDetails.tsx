@@ -26,7 +26,7 @@ const EducationalDetails: React.FC = () => {
             id="tenth_per"
             name="tenth_per"
             type="number"
-            value={values.tenth_per}
+            value={values.tenth_per ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
@@ -50,8 +50,8 @@ const EducationalDetails: React.FC = () => {
           <input
             id="twelfth_per"
             name="twelfth_per"
-            type="twelfth_per"
-            value={values.twelfth_per}
+            type="number"
+            value={values.twelfth_per ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
@@ -64,6 +64,7 @@ const EducationalDetails: React.FC = () => {
             <option value="CBSC">CBSC</option>
             <option value="ICSE">ICSE</option>
             <option value="Maharashtra HSC">Maharashtra HSC</option>
+            <option value="MSBTE">MSBTE</option>
             <option value="NIOS">NIOS</option>
           </select>
         </div>
@@ -77,7 +78,7 @@ const EducationalDetails: React.FC = () => {
             id="ug_per"
             name="ug_per"
             type="number"
-            value={values.ug_per}
+            value={values.ug_per ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
@@ -112,7 +113,7 @@ const EducationalDetails: React.FC = () => {
             id="grad_per"
             name="grad_per"
             type="number"
-            value={values.grad_per}
+            value={values.grad_per ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />

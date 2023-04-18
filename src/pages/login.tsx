@@ -4,14 +4,14 @@ import { useRouter } from 'next/router'
 
 const LoginForm = () => {
     const router = useRouter()
-    const [email, setEmail] = useState('')
+    const [username, setusername] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // Perform login logic here
-        console.log(email, password)
-        router.push('/home')
+        username === 'principal' && password === '123'
+            ? router.push('/home')
+            : console.log(`Wrong ${username !== 'principal' ? 'username' : 'password'}`);
     }
 
     return (
@@ -30,16 +30,16 @@ const LoginForm = () => {
                             <hr className="my-4 mx-4 border-gray-400" />
                             <div className="card-body mt-6">
                                 <div className="mb-4">
-                                    <label className="block text-gray-700 font-medium mb-2" htmlFor="email">
-                                        Email
+                                    <label className="block text-gray-700 font-medium mb-2" htmlFor="username">
+                                        Username
                                     </label>
                                     <input
                                         className="border border-gray-400 outline-none focus:border-blue-500 p-2 w-full rounded-md"
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        value={username}
+                                        onChange={(e) => setusername(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-6">

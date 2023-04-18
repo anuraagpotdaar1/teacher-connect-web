@@ -24,7 +24,7 @@ const ContactDetails: React.FC = () => {
             id="cno"
             name="cno"
             type="tel"
-            value={values.cno}
+            value={values.cno ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
@@ -35,7 +35,7 @@ const ContactDetails: React.FC = () => {
             id="emergency_cno"
             name="emergency_cno"
             type="tel"
-            value={values.emergency_cno}
+            value={values.emergency_cno ?? ""}
             onChange={handleChange}
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />

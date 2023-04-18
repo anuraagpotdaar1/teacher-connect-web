@@ -61,7 +61,7 @@ const PrevPostings: React.FC = () => {
             {/* Institute name */}
             <div className="mt-4 w-96">
               <label htmlFor={`institute_name_${institute}`} className="block mb-2 text-base font-bold text-gray-700">{`Institute name #${institute}`}</label>
-              <select name={`institute_name_${institute}`} id={`institute_name_${institute}`} value={values[`institute_name_${institute}`]} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
+              <select name={`institute_name_${institute}`} id={`institute_name_${institute}`} value={values[`institute_name_${institute}`] ?? ""} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
                 <option value="" disabled>Select</option>
                 <option value="ZP Pune">ZP Pune</option>
                 <option value="ZP Mumbai">ZP Mumbai</option>
@@ -98,7 +98,7 @@ const PrevPostings: React.FC = () => {
             <div className="mt-4 grid grid-cols-3 gap-12">
               <div className="mt-4 w-96">
                 <label htmlFor={`post_${institute}`} className="block mb-2 text-base font-bold text-gray-700">{`Post #${institute}`}</label>
-                <select name={`post_${institute}`} id={`post_${institute}`} value={values[`post_${institute}`]} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
+                <select name={`post_${institute}`} id={`post_${institute}`} value={values[`post_${institute}`] ?? ""} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
                   <option value="" disabled>Select</option>
                   <option value="Primary teacher">Primary teacher</option>
                   <option value="Secondary teacher">Secondary teacher</option>
@@ -109,7 +109,7 @@ const PrevPostings: React.FC = () => {
               </div>
               <div className="mt-4 w-96">
                 <label htmlFor={`subject_${institute}`} className="block mb-2 text-base font-bold text-gray-700">{`Subject #${institute}`}</label>
-                <select name={`subject_${institute}`} id={`subject_${institute}`} value={values[`subject_${institute}`]} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
+                <select name={`subject_${institute}`} id={`subject_${institute}`} value={values[`subject_${institute}`] ?? ""} onChange={handleSelectChange} className="border border-black rounded p-2 focus:outline-blue-500 flex w-full ">
                   <option value="" disabled>Select</option>
                   <option value="Maths 1">Maths 1</option>
                   <option value="Maths 2">Maths 2</option>
