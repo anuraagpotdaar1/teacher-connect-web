@@ -41,7 +41,7 @@ const MultiStepForm: React.FC = () => {
 
     const submit = async () => {
         try {
-            const formId = db.collection("forms").doc().id;
+            const formId = db.collection("teachers").doc().id;
 
             const stepData: {
                 Personal_details: Partial<BasicFormValues>,
@@ -71,18 +71,20 @@ const MultiStepForm: React.FC = () => {
                         stepName = "Prev_postings";
                     }
 
-                    if (stepName === "Personal_details") {
-                        stepData.Personal_details[key as keyof BasicFormValues] = value;
-                    } else if (stepName === "Contact_details") {
-                        stepData.Contact_details[key as keyof BasicFormValues] = value;
-                    } else if (stepName === "Educational_details") {
-                        stepData.Educational_details[key as keyof BasicFormValues] = value;
-                    } else if (stepName === "Prev_postings") {
-                        stepData.Prev_postings[key as keyof DynamicInstituteFormValues] = value;
+                    if (value) {
+                        if (stepName === "Personal_details") {
+                            stepData.Personal_details[key as keyof BasicFormValues] = value;
+                        } else if (stepName === "Contact_details") {
+                            stepData.Contact_details[key as keyof BasicFormValues] = value;
+                        } else if (stepName === "Educational_details") {
+                            stepData.Educational_details[key as keyof BasicFormValues] = value;
+                        } else if (stepName === "Prev_postings") {
+                            stepData.Prev_postings[key as keyof DynamicInstituteFormValues] = value;
+                        }
                     }
                 }
             }
-            await db.collection("forms").doc(formId).set(stepData);
+            await db.collection("teachers").doc(formId).set(stepData);
             console.log("Form submitted:", values);
             setValues(initialValues); // Reset form values
             setDialogMessage('Form submitted successfully!');
@@ -157,4 +159,3 @@ const MultiStepForm: React.FC = () => {
 };
 
 export default MultiStepForm;
-
