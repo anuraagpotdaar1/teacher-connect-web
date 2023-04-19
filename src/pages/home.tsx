@@ -1,31 +1,98 @@
-const stats = [
-  { name: 'Total Schools', stat: '15,897' },
-  { name: 'Total Teacher Intake', stat: '72,253' },
-  { name: 'Teacher Occupied', stat: '70,152' },
-  { name: 'Teacher Vacancy', stat: '2,156' },
-]
+import { useEffect, useState } from 'react';
+import { db } from '../firebase';
 
-export default function Home() {
-  return (
-    <div className="m-16">
-      <dl className="grid grid-cols-1 gap-16 sm:grid-cols-4">
-        {stats.map((item) => (
-          <div key={item.name} className="px-4 py-5 shadow-lg bg-indigo-50 rounded-lg overflow-hidden sm:p-6">
-            <dt className="text-sm font-medium text-black truncate">{item.name}</dt>
-            <dd className="mt-1 text-3xl text-indigo-700 font-bold">{item.stat}</dd>
-          </div>
-        ))}
-      </dl>
-      <form className="shadow-lg mt-16">
-        <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg px-4">
-          <svg aria-hidden="true" className="w-5 h-5 text-gray-500 mr-3 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <label htmlFor="search" className="sr-only">Search</label>
-          <input type="search" id="search" name="search" className="block w-full p-4 text-sm font-medium bg-gray-50 focus:outline-none focus:border-transparent" placeholder="Search school, teachers..." />
-          <button type="submit" className="flex-shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg ml-3">Search</button>
-        </div>
-      </form>
-    </div>
-  )
+interface PersonalDetails {
+  f_name: string;
+  surname: string;
 }
+
+interface Contactdetails {
+  cno: number;
+}
+
+interface DataType {
+  Personal_details: PersonalDetails;
+  Contact_details: Contactdetails;
+  // Add other fields as needed
+}
+
+const Home = () => {
+  const [documentsData, setDocumentsData] = useState<DataType[]>([]);
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    if (searchText === '') {
+      setDocumentsData([]);
+      return;
+    }
+
+    const [f_name, surname] = searchText.split(' ');
+
+    let query = db.collection('teachers');
+
+    if (f_name) {
+      query = query.where('Personal_details.f_name', '>=', f_name).where('Personal_details.f_name', '<', f_name + '\uf8ff') as unknown as typeof query;
+    }
+
+    const unsubscribe = query.onSnapshot((snapshot) => {
+      let fetchedData: DataType[] = [];
+      snapshot.forEach((doc) => {
+        fetchedData.push(doc.data() as DataType);
+      });
+
+      if (surname) {
+        fetchedData = fetchedData.filter((docData) => {
+          if (docData.Personal_details.surname) {
+            return docData.Personal_details.surname >= surname && docData.Personal_details.surname < surname + '\uf8ff';
+          }
+          return false;
+        });
+      }
+
+      setDocumentsData(fetchedData);
+    });
+
+    // Clean up the listener on unmount
+    return () => {
+      unsubscribe();
+    };
+  }, [searchText]);
+
+
+  return (
+    <div>
+      <input
+        type="text"
+        className="border border-gray-300 px-3 py-2 m-10"
+        placeholder="Search by first and middle names"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      {documentsData.length > 0 ? (
+        <>
+          <p>Documents with the name exist:</p>
+          <table className="min-w-full table-auto">
+            <thead className="bg-gray-800 text-white">
+              <tr>
+                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">Cno</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              {documentsData.map((docData, index) => (
+                <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                  <td className="px-4 py-2">{docData.Personal_details.f_name} {docData.Personal_details.surname}</td>
+                  <td className="px-4 py-2">{docData.Contact_details.cno}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p>No document with the name exists.</p>
+      )}
+    </div>
+  );
+};
+
+export default Home;

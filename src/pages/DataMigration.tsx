@@ -1,5 +1,5 @@
 import { FormProvider } from '../componants/FormContext';
-import MultiStepForm from '../componants/MultiStepForm';
+import MultiStepForm from '../componants/multistepform';
 
 const FormPage: React.FC = () => {
   return (

@@ -5,7 +5,7 @@ import PersonalDetails from './steps/PersonalDetails';
 import ContactDetails from './steps/ContactDetails';
 import EducationalDetails from './steps/EducationalDetails';
 import PrevPostings from './steps/PrevPostings';
-import { db } from '@/firebase';
+import { db } from '../firebase';
 import { Dialog } from '@headlessui/react'
 
 const steps = [
