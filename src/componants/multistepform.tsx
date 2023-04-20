@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { FormContext } from './FormContext';
-import { BasicFormValues, DynamicInstituteFormValues, FormValues, initialValues } from "./formTypes";
+import { PersonalDetailsValues, ContactDetailsValues, EducationalDetailsValues, DynamicInstituteFormValues, FormValues, initialValues } from "./formTypes";
 import PersonalDetails from './steps/PersonalDetails';
 import ContactDetails from './steps/ContactDetails';
 import EducationalDetails from './steps/EducationalDetails';
@@ -44,9 +44,9 @@ const MultiStepForm: React.FC = () => {
             const formId = db.collection("teachers").doc().id;
 
             const stepData: {
-                Personal_details: Partial<BasicFormValues>,
-                Contact_details: Partial<BasicFormValues>,
-                Educational_details: Partial<BasicFormValues>,
+                Personal_details: Partial<PersonalDetailsValues>,
+                Contact_details: Partial<ContactDetailsValues>,
+                Educational_details: Partial<EducationalDetailsValues>,
                 Prev_postings: Partial<DynamicInstituteFormValues>,
             } = {
                 Personal_details: {},
@@ -73,11 +73,11 @@ const MultiStepForm: React.FC = () => {
 
                     if (value) {
                         if (stepName === "Personal_details") {
-                            stepData.Personal_details[key as keyof BasicFormValues] = value;
+                            stepData.Personal_details[key as keyof PersonalDetailsValues] = value;
                         } else if (stepName === "Contact_details") {
-                            stepData.Contact_details[key as keyof BasicFormValues] = value;
+                            stepData.Contact_details[key as keyof ContactDetailsValues] = value;
                         } else if (stepName === "Educational_details") {
-                            stepData.Educational_details[key as keyof BasicFormValues] = value;
+                            stepData.Educational_details[key as keyof EducationalDetailsValues] = value;
                         } else if (stepName === "Prev_postings") {
                             stepData.Prev_postings[key as keyof DynamicInstituteFormValues] = value;
                         }
@@ -99,7 +99,7 @@ const MultiStepForm: React.FC = () => {
 
     return (
         <div>
-            <div className="mb-4">
+            <div className="m-4">
                 <div>Step {currentStep + 1} of {steps.length}</div>
                 <div className="h-2 bg-gray-200 mt-2 rounded-full">
                     <div className="h-2 bg-indigo-500 rounded-full" style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}></div>

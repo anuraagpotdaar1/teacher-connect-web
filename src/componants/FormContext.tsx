@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState } from 'react';
 import { FormValues, initialValues } from './formTypes';
 
 interface FormContextProps {
@@ -26,8 +26,6 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
     const updateValues = (newValues: Partial<FormValues>) => {
         setValues((prevValues: FormValues) => ({ ...prevValues, ...newValues } as FormValues));
     };
-
-
 
     return (
         <FormContext.Provider value={{ values, setValues: updateValues }}>

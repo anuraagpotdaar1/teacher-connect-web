@@ -21,7 +21,7 @@ const generateInstituteProperties = (numOfInstitutes: number): InstituteProperti
   return properties;
 };
 
-export type BasicFormValues = {
+export type PersonalDetailsValues = {
   f_name: string;
   m_name: string;
   surname: string;
@@ -34,12 +34,17 @@ export type BasicFormValues = {
   disability: string;
   marital_status: string;
   id_mark: string;
+  behaviour: string;
+};
 
+export type ContactDetailsValues = {
   cno: string;
   emergency_cno: string;
   email: string;
   address: string;
+};
 
+export type EducationalDetailsValues = {
   tenth_per: string;
   tenth_board: string;
   twelfth_per: string;
@@ -50,15 +55,13 @@ export type BasicFormValues = {
   grad_per: string;
   grad_uni: string;
   grad_field: string;
-
-  behaviour: string;
 };
 
 export type DynamicInstituteFormValues = {
   [P in keyof ReturnType<typeof generateInstituteProperties>]: string;
 };
 
-export type FormValues = BasicFormValues & DynamicInstituteFormValues;
+export type FormValues = PersonalDetailsValues & ContactDetailsValues & EducationalDetailsValues & DynamicInstituteFormValues;
 
 export const initialValues: FormValues = {
   f_name: '',
