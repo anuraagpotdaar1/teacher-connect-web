@@ -104,7 +104,7 @@ const PersonalDetails: React.FC = () => {
             <option value="Hindu">Hindu</option>
             <option value="Muslim">Muslim</option>
             <option value="Christian">Christian</option>
-            <option value="Buddhish">Buddhist</option>
+            <option value="Buddhist">Buddhist</option>
             <option value="Sikh">Sikh</option>
           </select>
         </div>
