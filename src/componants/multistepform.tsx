@@ -7,6 +7,7 @@ import EducationalDetails from './steps/EducationalDetails';
 import PrevPostings from './steps/PrevPostings';
 import { db } from '../firebase';
 import { Dialog } from '@headlessui/react'
+import { collection, addDoc } from "firebase/firestore";
 
 const steps = [
     { key: 'step1', component: <PersonalDetails /> },
@@ -41,8 +42,6 @@ const MultiStepForm: React.FC = () => {
 
     const submit = async () => {
         try {
-            const formId = db.collection("teachers").doc().id;
-
             const stepData: {
                 Personal_details: Partial<PersonalDetailsValues>,
                 Contact_details: Partial<ContactDetailsValues>,
@@ -84,7 +83,7 @@ const MultiStepForm: React.FC = () => {
                     }
                 }
             }
-            await db.collection("teachers").doc(formId).set(stepData);
+            await addDoc(collection(db, "teachers"), stepData);
             console.log("Form submitted:", values);
             setValues(initialValues); // Reset form values
             setDialogMessage('Form submitted successfully!');
@@ -159,3 +158,7 @@ const MultiStepForm: React.FC = () => {
 };
 
 export default MultiStepForm;
+
+function uuidv4() {
+    throw new Error('Function not implemented.');
+}

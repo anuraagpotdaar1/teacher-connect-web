@@ -26,11 +26,6 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState<DataType | null>(null);
 
-  const handleSearch = (data: DataType[], searchText: string) => {
-    setDocumentsData(data);
-    setSearchText(searchText);
-  };
-
   const handleRowClick = (data: DataType) => {
     setSelectedData(data);
     setIsModalOpen(true);

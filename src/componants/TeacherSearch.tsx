@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { db } from '../firebase';
 import { DataType } from '../pages/home';
+import { collection, query, where, onSnapshot, Query } from "firebase/firestore";
 
 interface TeacherSearchProps {
     setDocumentsData: (data: DataType[]) => void;
@@ -9,24 +10,26 @@ interface TeacherSearchProps {
 }
 
 const TeacherSearch: React.FC<TeacherSearchProps> = ({ setDocumentsData, searchText, setSearchText }) => {
-   
+
     useEffect(() => {
-        if (searchText === '') {
+        if (searchText === "") {
             setDocumentsData([]);
             return;
         }
 
-        const [f_name, surname] = searchText.split(' ');
+        const [f_name, surname] = searchText.split(" ");
 
-        let query = db.collection('teachers');
+        let baseQuery: Query = collection(db, "teachers");
 
         if (f_name) {
-            query = query
-                .where('Personal_details.f_name', '>=', f_name)
-                .where('Personal_details.f_name', '<', f_name + '\uf8ff') as unknown as typeof query;
+            baseQuery = query(
+                baseQuery,
+                where("Personal_details.f_name", ">=", f_name),
+                where("Personal_details.f_name", "<", f_name + "\uf8ff")
+            );
         }
 
-        const unsubscribe = query.onSnapshot((snapshot) => {
+        const unsubscribe = onSnapshot(baseQuery, (snapshot) => {
             let fetchedData: DataType[] = [];
             snapshot.forEach((doc) => {
                 fetchedData.push(doc.data() as DataType);
@@ -35,7 +38,10 @@ const TeacherSearch: React.FC<TeacherSearchProps> = ({ setDocumentsData, searchT
             if (surname) {
                 fetchedData = fetchedData.filter((docData) => {
                     if (docData.Personal_details.surname) {
-                        return docData.Personal_details.surname >= surname && docData.Personal_details.surname < surname + '\uf8ff';
+                        return (
+                            docData.Personal_details.surname >= surname &&
+                            docData.Personal_details.surname < surname + "\uf8ff"
+                        );
                     }
                     return false;
                 });
@@ -49,6 +55,7 @@ const TeacherSearch: React.FC<TeacherSearchProps> = ({ setDocumentsData, searchT
             unsubscribe();
         };
     }, [searchText, setDocumentsData]);
+
 
     return (
         <div className="my-14">

@@ -1,6 +1,8 @@
 import { Dialog } from '@headlessui/react';
 import { DataType } from '../pages/home';
+import Reprimands from './Reprimands';
 import _ from 'lodash';
+import { useState } from 'react';
 
 const detailsList = [
   { title: "Overall behaviour", value: 'Prev_postings.behaviour' },
@@ -22,6 +24,13 @@ const detailsList = [
   { title: "Current salary", value: 'Prev_postings.ending_salary_1' },
 ];
 
+const openServiceBook = () => {
+  const url = "https://drive.google.com/file/d/1kWlWJ9kfK2C2UYEcIrvu2kEoybXXUzwg/view";
+  const windowName = "Popup";
+  const windowFeatures = "width=600, height=1000, left=100, top=100, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes";
+  window.open(url, windowName, windowFeatures);
+};
+
 interface TeacherDetailsDialogProps {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
@@ -29,6 +38,8 @@ interface TeacherDetailsDialogProps {
 }
 
 const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen, setIsModalOpen, selectedData }) => {
+  const [isReprimandsOpen, setIsReprimandsOpen] = useState(false);
+
   return (
     <Dialog
       open={isModalOpen}
@@ -44,7 +55,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             {_.get(selectedData, "Personal_details.surname")}&apos;s digital
             service book
           </Dialog.Title>
-          <hr className='my-4'/>
+          <hr className='my-4' />
           {selectedData && (
             <dl className="divide-y divide-gray-100">
               {detailsList.map((item, index) => (
@@ -71,6 +82,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             </button>
             <button
               className="bg-indigo-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+              onClick={openServiceBook}
             >
               View uploaded service book
             </button>
@@ -81,6 +93,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             </button>
             <button
               className="bg-indigo-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+              onClick={() => setIsReprimandsOpen(true)}
             >
               Manage reprimands
             </button>
@@ -92,11 +105,9 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
           </div>
         </div>
       </div>
+      <Reprimands isOpen={isReprimandsOpen} setIsReprimandsOpen={setIsReprimandsOpen} />
     </Dialog>
   );
 };
 
 export default TeacherDetailsDialog;
-
-
-
