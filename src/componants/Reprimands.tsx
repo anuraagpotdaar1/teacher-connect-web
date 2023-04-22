@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import { DataType } from "../pages/home";
 import { doc, collection, updateDoc, arrayUnion, onSnapshot } from 'firebase/firestore';
 import { db } from "../firebase";
 
 interface ReprimandsProps {
   isOpen: boolean;
   setIsReprimandsOpen: (open: boolean) => void;
-  selectedData: DataType | null;
+  docId: string | null;
 }
 
-const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, selectedData }) => {
+const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, docId }) => {
   const [newReprimand, setNewReprimand] = useState("");
   const [reprimands, setReprimands] = useState<any[]>([]);
 
   useEffect(() => {
-    if (selectedData && selectedData.docId) {
-      const selectedDataRef = doc(collection(db, "teachers"), selectedData.docId);
-      const unsubscribe = onSnapshot(selectedDataRef, (docSnapshot) => {
+    if (docId && docId) {
+      const docIdRef = doc(collection(db, "teachers"), docId);
+      const unsubscribe = onSnapshot(docIdRef, (docSnapshot) => {
         const data = docSnapshot.data();
         if (data && data.Reprimands) {
           setReprimands(data.Reprimands);
@@ -26,18 +25,18 @@ const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, se
 
       return () => unsubscribe();
     }
-  }, [selectedData]);
+  }, [docId]);
 
   const submitReprimand = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (newReprimand && selectedData && selectedData.docId) {
+    if (newReprimand && docId && docId) {
       const newReprimandObj = {
         remark: newReprimand,
         timestamp: new Date().toISOString(),
       };
 
-      const selectedDataRef = doc(collection(db, "teachers"), selectedData.docId);
-      await updateDoc(selectedDataRef, {
+      const docIdRef = doc(collection(db, "teachers"), docId);
+      await updateDoc(docIdRef, {
         Reprimands: arrayUnion(newReprimandObj),
       });
 

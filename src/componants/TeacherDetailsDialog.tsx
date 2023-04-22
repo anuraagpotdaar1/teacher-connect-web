@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { DataType } from '../pages/home';
 import Reprimands from './Reprimands';
+import Tasks from './Tasks';
 import _ from 'lodash';
 import { useState } from 'react';
 
@@ -39,6 +40,7 @@ interface TeacherDetailsDialogProps {
 
 const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen, setIsModalOpen, selectedData }) => {
   const [isReprimandsOpen, setIsReprimandsOpen] = useState(false);
+  const [isTasksOpen, setIsTasksOpen] = useState(false);
 
   return (
     <Dialog
@@ -63,10 +65,10 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
                   key={index}
                   className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                 >
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                  <dt className="text-sm font-medium leading-6 text-black">
                     {item.title}:
                   </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
                     {_.get(selectedData, item.value)}
                   </dd>
                 </div>
@@ -99,6 +101,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             </button>
             <button
               className="bg-indigo-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+              onClick={() => setIsTasksOpen(true)}
             >
               Manage tasks
             </button>
@@ -108,7 +111,12 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
       <Reprimands
         isOpen={isReprimandsOpen}
         setIsReprimandsOpen={setIsReprimandsOpen}
-        selectedData={selectedData}
+        docId={selectedData?.docId ?? null}
+      />
+      <Tasks
+        isOpen={isTasksOpen}
+        setIsTasksOpen={setIsTasksOpen}
+        docId={selectedData?.docId ?? null}
       />
     </Dialog>
   );

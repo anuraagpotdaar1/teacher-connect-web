@@ -21,8 +21,8 @@ const menuItems: MenuItem[] = [
         title: 'Data Migration',
     },
     {
-        href: '/settings',
-        title: 'Settings',
+        href: '/login',
+        title: 'Log out',
     },
 ];
 
