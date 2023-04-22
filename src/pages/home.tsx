@@ -15,9 +15,14 @@ const stats = [
 ];
 
 export interface DataType {
+  docId: string;
   Personal_details: Pick<PersonalDetailsValues, 'f_name' | 'm_name' | 'surname'>;
   Contact_details: Pick<ContactDetailsValues, 'cno'>;
   Prev_postings: Pick<DynamicInstituteFormValues, 'institute_name_1' | 'subject_1'>;
+  Reprimands?: Array<{
+    timestamp: any;
+    text: string;
+  }>;
 }
 
 const Home = () => {

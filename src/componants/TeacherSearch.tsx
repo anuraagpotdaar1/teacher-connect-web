@@ -32,7 +32,7 @@ const TeacherSearch: React.FC<TeacherSearchProps> = ({ setDocumentsData, searchT
         const unsubscribe = onSnapshot(baseQuery, (snapshot) => {
             let fetchedData: DataType[] = [];
             snapshot.forEach((doc) => {
-                fetchedData.push(doc.data() as DataType);
+                fetchedData.push({ docId: doc.id, ...doc.data() } as DataType);
             });
 
             if (surname) {
@@ -46,7 +46,7 @@ const TeacherSearch: React.FC<TeacherSearchProps> = ({ setDocumentsData, searchT
                     return false;
                 });
             }
-
+            console.log(fetchedData);
             setDocumentsData(fetchedData);
         });
 

@@ -105,7 +105,11 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
           </div>
         </div>
       </div>
-      <Reprimands isOpen={isReprimandsOpen} setIsReprimandsOpen={setIsReprimandsOpen} />
+      <Reprimands
+        isOpen={isReprimandsOpen}
+        setIsReprimandsOpen={setIsReprimandsOpen}
+        selectedData={selectedData}
+      />
     </Dialog>
   );
 };
