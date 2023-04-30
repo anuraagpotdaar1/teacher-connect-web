@@ -105,13 +105,13 @@ const Requests: React.FC = () => {
                   {activeRequests.map((request, index) => (
                     <tr key={index} className={index % 2 === 0 ? 'bg-indigo-50' : 'bg-indigo-100'}>
                       <td className="px-6 py-2 font-medium">
+                        {request.reqType}
+                      </td>
+                      <td className="px-6 py-2 font-medium">
                         {request.request}
                       </td>
                       <td className="px-6 py-2 font-medium">
-                        {request.status}
-                      </td>
-                      <td className="px-6 py-2 font-medium">
-                        {request.status}
+                        {request.by}
                       </td>
                       <td className="px-6 py-2 font-medium text-center">
                         <button
@@ -155,10 +155,13 @@ const Requests: React.FC = () => {
                   {completedRequests.map((request, index) => (
                     <tr key={index}>
                       <td className="px-6 py-2 font-medium">
+                        {request.reqType}
+                      </td>
+                      <td className="px-6 py-2 font-medium">
                         {request.request}
                       </td>
                       <td className="px-6 py-2 font-medium">
-                        {request.status}
+                        {request.by}
                       </td>
                       <td className="px-6 py-2 font-medium">
                         {request.action}
