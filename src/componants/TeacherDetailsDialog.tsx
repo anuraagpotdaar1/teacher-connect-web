@@ -4,6 +4,7 @@ import Reprimands from './Reprimands';
 import Tasks from './Tasks';
 import _ from 'lodash';
 import { useState } from 'react';
+import Attendance from './AttentanceReport';
 
 const detailsList = [
   { title: "Overall behaviour", value: 'Prev_postings.behaviour' },
@@ -41,6 +42,7 @@ interface TeacherDetailsDialogProps {
 const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen, setIsModalOpen, selectedData }) => {
   const [isReprimandsOpen, setIsReprimandsOpen] = useState(false);
   const [isTasksOpen, setIsTasksOpen] = useState(false);
+  const [isAttendanceOpen, setIsAttendanceOpen] = useState(false);
 
   return (
     <Dialog
@@ -90,6 +92,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             </button>
             <button
               className="bg-indigo-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+              onClick={() => setIsAttendanceOpen(true)}
             >
               View attentance report
             </button>
@@ -118,6 +121,12 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
         setIsTasksOpen={setIsTasksOpen}
         docId={selectedData?.docId ?? null}
       />
+      <Attendance
+        isOpen={isAttendanceOpen}
+        setIsAttendanceOpen={setIsAttendanceOpen}
+        docId={selectedData?.docId ?? null}
+      />
+
     </Dialog>
   );
 };
