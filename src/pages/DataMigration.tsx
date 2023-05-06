@@ -1,5 +1,6 @@
 import { FormProvider } from '../componants/FormContext';
 import MultiStepForm from '../componants/multistepform';
+import withAuth from './hoc/withAuth';
 
 const FormPage: React.FC = () => {
   return (
@@ -12,4 +13,4 @@ const FormPage: React.FC = () => {
   );
 };
 
-export default FormPage;
+export default withAuth(FormPage)

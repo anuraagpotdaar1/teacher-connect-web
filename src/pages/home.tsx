@@ -6,6 +6,7 @@ import {
   ContactDetailsValues,
   DynamicInstituteFormValues,
 } from '../componants/formTypes';
+import withAuth from './hoc/withAuth';
 
 const stats = [
   { name: 'Total Schools', stat: '15,897' },
@@ -105,4 +106,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home)

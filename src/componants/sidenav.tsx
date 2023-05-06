@@ -1,11 +1,14 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import Link from 'next/link';
+import { logout } from '../pages/api/auth';
 
 type MenuItem = {
     href: string;
     title: string;
+    onClick?: () => void;
 };
+
 
 const menuItems: MenuItem[] = [
     {
@@ -23,6 +26,7 @@ const menuItems: MenuItem[] = [
     {
         href: '/login',
         title: 'Log out',
+        onClick: () => logout(router),
     },
 ];
 
@@ -39,7 +43,13 @@ const SideNav = () => {
                         <li
                             key={menuItem.href}
                             className={router.pathname === menuItem.href ? 'bg-indigo-200 rounded-lg' : ''}>
-                            <Link href={menuItem.href} className="block p-2 mt-3 px-3 rounded-lg hover:bg-indigo-100">
+                            <Link href={menuItem.href} className="block p-2 mt-3 px-3 rounded-lg hover:bg-indigo-100"
+                                onClick={(e) => {
+                                    if (menuItem.onClick) {
+                                        e.preventDefault();
+                                        menuItem.onClick();
+                                    }
+                                }}>
                                 {menuItem.title}
                             </Link>
                         </li>

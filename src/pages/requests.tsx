@@ -3,6 +3,7 @@ import { Tab } from "@headlessui/react";
 import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import DeclineRequestDialog from '../componants/DeclineRequestDialog';
+import withAuth from "./hoc/withAuth";
 
 interface RequestData {
   id: string;
@@ -183,4 +184,5 @@ const Requests: React.FC = () => {
     </div>
   );
 };
-export default Requests;
+
+export default withAuth(Requests)

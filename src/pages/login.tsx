@@ -4,14 +4,27 @@ import { useRouter } from 'next/router'
 
 const LoginForm = () => {
     const router = useRouter()
-    const [username, setusername] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        username === 'principal' && password === '123'
-            ? router.push('/home')
-            : console.log(`Wrong ${username !== 'principal' ? 'username' : 'password'}`);
+
+        const response = await fetch('/api/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+
+        if (response.status === 200) {
+            localStorage.setItem('isAuthenticated', 'true')
+            router.push('/home')
+        } else {
+            const data = await response.json()
+            console.log(data.message)
+        }
     }
 
     return (
@@ -39,7 +52,7 @@ const LoginForm = () => {
                                         id="username"
                                         name="username"
                                         value={username}
-                                        onChange={(e) => setusername(e.target.value)}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-6">
