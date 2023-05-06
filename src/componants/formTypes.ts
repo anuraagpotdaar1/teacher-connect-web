@@ -35,6 +35,7 @@ export type PersonalDetailsValues = {
   marital_status: string;
   id_mark: string;
   behaviour: string;
+  availableLeaves: string;
 };
 
 export type ContactDetailsValues = {
@@ -94,6 +95,8 @@ export const initialValues: FormValues = {
   grad_uni: '',
 
   behaviour: '',
+
+  availableLeaves: '40',
 
   // Use the spread operator to add the generated properties to the initialValues object
   ...generateInstituteProperties(numOfInstitutes),

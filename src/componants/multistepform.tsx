@@ -66,7 +66,7 @@ const MultiStepForm: React.FC = () => {
                         stepName = "Contact_details";
                     } else if (key.startsWith("tenth") || key.startsWith("twelfth") || key.startsWith("ug_") || key.startsWith("grad_")) {
                         stepName = "Educational_details";
-                    } else if (key.startsWith("behav") || key.startsWith("institute") || key.startsWith("doj") || key.startsWith("dol") || key.startsWith("post") || key.startsWith("subject") || key.startsWith("start") || key.startsWith("end") || key.startsWith("remark")) {
+                    } else if (key.startsWith("behav") || key.startsWith("institute") || key.startsWith("doj") || key.startsWith("dol") || key.startsWith("post") || key.startsWith("subject") || key.startsWith("start") || key.startsWith("end") || key.startsWith("remark") || key.startsWith("availableLeaves")) {
                         stepName = "Prev_postings";
                     }
 
