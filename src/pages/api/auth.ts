@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { username, password } = req.body
-  const isAuthenticated = username === 'principal' && password === '123'
+  const isAuthenticated = username === 'principal' && password === 'q12we3'
 
   if (isAuthenticated) {
     res.status(200).json({ success: true })
