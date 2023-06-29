@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.14",
+    "@headlessui/react": "^1.7.15",
     "@types/node": "20.2.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
