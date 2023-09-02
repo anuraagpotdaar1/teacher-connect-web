@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { FormContext } from '../FormContext';
+import { useContext } from "react";
+import { FormContext } from "../FormContext";
 
 const ContactDetails: React.FC = () => {
   const { values, setValues } = useContext(FormContext);
@@ -12,14 +12,21 @@ const ContactDetails: React.FC = () => {
   const handleTeaxtAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setValues({ [name]: value });
-  }
+  };
 
   return (
     <form>
-      <h1 className="block text-2xl font-bold text-gray-700">Contact details of {values.f_name}</h1>
+      <h1 className="block text-2xl font-bold text-gray-700">
+        Contact details of {values.f_name}
+      </h1>
       <div className="my-10 grid grid-flow-col auto-cols-max gap-12">
-        <div className='w-96'>
-          <label htmlFor="cno" className="block mb-2 text-base font-bold text-gray-700">Contact number of {values.f_name}</label>
+        <div className="w-96">
+          <label
+            htmlFor="cno"
+            className="block mb-2 text-base font-bold text-gray-700"
+          >
+            Contact number of {values.f_name}
+          </label>
           <input
             id="cno"
             name="cno"
@@ -29,8 +36,13 @@ const ContactDetails: React.FC = () => {
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
         </div>
-        <div className='w-96'>
-          <label htmlFor="emergency_cno" className="block mb-2 text-base font-bold text-gray-700">Emergency contact number</label>
+        <div className="w-96">
+          <label
+            htmlFor="emergency_cno"
+            className="block mb-2 text-base font-bold text-gray-700"
+          >
+            Emergency contact number
+          </label>
           <input
             id="emergency_cno"
             name="emergency_cno"
@@ -40,8 +52,13 @@ const ContactDetails: React.FC = () => {
             className="border border-black rounded p-2 focus:outline-blue-500 w-full"
           />
         </div>
-        <div className='w-96'>
-          <label htmlFor="email" className="block mb-2 text-base font-bold text-gray-700">Email id</label>
+        <div className="w-96">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-base font-bold text-gray-700"
+          >
+            Email id
+          </label>
           <input
             id="email"
             name="email"
@@ -52,8 +69,13 @@ const ContactDetails: React.FC = () => {
           />
         </div>
       </div>
-      <div className='w-full'>
-        <label htmlFor="address" className="block mb-2 text-base font-bold text-gray-700">Current address</label>
+      <div className="w-full">
+        <label
+          htmlFor="address"
+          className="block mb-2 text-base font-bold text-gray-700"
+        >
+          Current address
+        </label>
         <textarea
           id="address"
           name="address"

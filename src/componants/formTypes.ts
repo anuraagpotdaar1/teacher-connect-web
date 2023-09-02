@@ -4,18 +4,20 @@ type InstituteProperties = {
   [key: string]: string;
 };
 
-const generateInstituteProperties = (numOfInstitutes: number): InstituteProperties => {
+const generateInstituteProperties = (
+  numOfInstitutes: number,
+): InstituteProperties => {
   let properties: InstituteProperties = {};
 
   for (let i = 1; i <= numOfInstitutes; i++) {
-    properties[`institute_name_${i}`] = '';
-    properties[`doj_${i}`] = '';
-    properties[`dol_${i}`] = '';
-    properties[`post_${i}`] = '';
-    properties[`subject_${i}`] = '';
-    properties[`starting_salary_${i}`] = '';
-    properties[`ending_salary_${i}`] = '';
-    properties[`remark_${i}`] = '';
+    properties[`institute_name_${i}`] = "";
+    properties[`doj_${i}`] = "";
+    properties[`dol_${i}`] = "";
+    properties[`post_${i}`] = "";
+    properties[`subject_${i}`] = "";
+    properties[`starting_salary_${i}`] = "";
+    properties[`ending_salary_${i}`] = "";
+    properties[`remark_${i}`] = "";
   }
 
   return properties;
@@ -62,41 +64,44 @@ export type DynamicInstituteFormValues = {
   [P in keyof ReturnType<typeof generateInstituteProperties>]: string;
 };
 
-export type FormValues = PersonalDetailsValues & ContactDetailsValues & EducationalDetailsValues & DynamicInstituteFormValues;
+export type FormValues = PersonalDetailsValues &
+  ContactDetailsValues &
+  EducationalDetailsValues &
+  DynamicInstituteFormValues;
 
 export const initialValues: FormValues = {
-  f_name: '',
-  m_name: '',
-  surname: '',
-  dob: '',
-  pob: '',
-  blood_group: '',
-  religion: '',
-  caste: '',
-  gender: '',
-  disability: '',
-  marital_status: '',
-  id_mark: '',
+  f_name: "",
+  m_name: "",
+  surname: "",
+  dob: "",
+  pob: "",
+  blood_group: "",
+  religion: "",
+  caste: "",
+  gender: "",
+  disability: "",
+  marital_status: "",
+  id_mark: "",
 
-  cno: '',
-  emergency_cno: '',
-  email: '',
-  address: '',
+  cno: "",
+  emergency_cno: "",
+  email: "",
+  address: "",
 
-  tenth_per: '',
-  tenth_board: '',
-  twelfth_per: '',
-  twelfth_board: '',
-  ug_per: '',
-  ug_uni: '',
-  ug_field: '',
-  grad_per: '',
-  grad_field: '',
-  grad_uni: '',
+  tenth_per: "",
+  tenth_board: "",
+  twelfth_per: "",
+  twelfth_board: "",
+  ug_per: "",
+  ug_uni: "",
+  ug_field: "",
+  grad_per: "",
+  grad_field: "",
+  grad_uni: "",
 
-  behaviour: '',
+  behaviour: "",
 
-  availableLeaves: '40',
+  availableLeaves: "40",
 
   // Use the spread operator to add the generated properties to the initialValues object
   ...generateInstituteProperties(numOfInstitutes),

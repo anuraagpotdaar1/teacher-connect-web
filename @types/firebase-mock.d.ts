@@ -1,1 +1,1 @@
-declare module 'firebase-mock';
+declare module "firebase-mock";
