@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import { doc, collection, updateDoc, arrayUnion, onSnapshot } from 'firebase/firestore';
+import {
+  doc,
+  collection,
+  updateDoc,
+  arrayUnion,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 interface AttendanceProps {
@@ -9,7 +15,11 @@ interface AttendanceProps {
   docId: string | null;
 }
 
-const Attendance: React.FC<AttendanceProps> = ({ isOpen, setIsAttendanceOpen, docId }) => {
+const Attendance: React.FC<AttendanceProps> = ({
+  isOpen,
+  setIsAttendanceOpen,
+  docId,
+}) => {
   const [Attendance, setAttendance] = useState<any[]>([]);
 
   useEffect(() => {
@@ -44,21 +54,21 @@ const Attendance: React.FC<AttendanceProps> = ({ isOpen, setIsAttendanceOpen, do
           </div>
           <hr />
           <dl className="mt-2 divide-y divide-gray-100 max-h-60 overflow-y-scroll">
-            {Attendance.slice().reverse().map((attendanceData, index) => {
-              const date = Object.keys(attendanceData)[0];
-              const time = attendanceData[date].time;
-              return (
-                <div key={index} className="px-4 py-2 grid grid-cols-4 gap-4">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">{date}</dt>
-                  <dd className="text-sm leading-4">
-                    {time}
-                  </dd>
-                  <dd className="text-sm leading-4">
-                    Present
-                  </dd>
-                </div>
-              );
-            })}
+            {Attendance.slice()
+              .reverse()
+              .map((attendanceData, index) => {
+                const date = Object.keys(attendanceData)[0];
+                const time = attendanceData[date].time;
+                return (
+                  <div key={index} className="px-4 py-2 grid grid-cols-4 gap-4">
+                    <dt className="text-sm font-medium leading-6 text-gray-900">
+                      {date}
+                    </dt>
+                    <dd className="text-sm leading-4">{time}</dd>
+                    <dd className="text-sm leading-4">Present</dd>
+                  </div>
+                );
+              })}
           </dl>
 
           <button

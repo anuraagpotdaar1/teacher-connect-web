@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
-import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
-import DeclineRequestDialog from '../componants/DeclineRequestDialog';
+import DeclineRequestDialog from "../componants/DeclineRequestDialog";
 import withAuth from "./hoc/withAuth";
 
 interface RequestData {
@@ -16,8 +23,9 @@ const Requests: React.FC = () => {
   const [activeRequests, setActiveRequests] = useState<RequestData[]>([]);
   const [completedRequests, setCompletedRequests] = useState<RequestData[]>([]);
 
-  const [declineRequestDialogOpen, setDeclineRequestDialogOpen] = useState(false);
-  const [currentRequestId, setCurrentRequestId] = useState('');
+  const [declineRequestDialogOpen, setDeclineRequestDialogOpen] =
+    useState(false);
+  const [currentRequestId, setCurrentRequestId] = useState("");
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "requests"), (snapshot) => {
@@ -57,29 +65,34 @@ const Requests: React.FC = () => {
     setDeclineRequestDialogOpen(true);
   };
 
-
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl text-indigo-800 font-bold mb-14">Requests</h1>
       <div className="mt-14 flex flex-col justify-center">
         <Tab.Group>
           <Tab.List className="flex m-auto p-1 w-1/4 space-x-1 bg-blue-900/20 rounded-xl">
-            <Tab className={({ selected }) =>
-              `w-full py-2.5 text-sm leading-5 font-bold text-blue-700 rounded-lg
-            ${selected
+            <Tab
+              className={({ selected }) =>
+                `w-full py-2.5 text-sm leading-5 font-bold text-blue-700 rounded-lg
+            ${
+              selected
                 ? "bg-white shadow outline-none"
                 : "text-blue-100 hover:bg-white/[0.12] hover:text-blue-800"
-              }`
-            }>
+            }`
+              }
+            >
               Active ({activeRequests.length})
             </Tab>
-            <Tab className={({ selected }) =>
-              `w-full py-2.5 text-sm leading-5 font-bold text-blue-700 rounded-lg
-            ${selected
+            <Tab
+              className={({ selected }) =>
+                `w-full py-2.5 text-sm leading-5 font-bold text-blue-700 rounded-lg
+            ${
+              selected
                 ? "bg-white shadow outline-none"
                 : "text-blue-100 hover:bg-white/[0.12] hover:text-blue-800"
-              }`
-            }>
+            }`
+              }
+            >
               Completed ({completedRequests.length})
             </Tab>
           </Tab.List>
@@ -104,16 +117,19 @@ const Requests: React.FC = () => {
                 </thead>
                 <tbody className="bg-white">
                   {activeRequests.map((request, index) => (
-                    <tr key={index} className={index % 2 === 0 ? 'bg-indigo-50' : 'bg-indigo-100'}>
+                    <tr
+                      key={index}
+                      className={
+                        index % 2 === 0 ? "bg-indigo-50" : "bg-indigo-100"
+                      }
+                    >
                       <td className="px-6 py-2 font-medium">
                         {request.reqType}
                       </td>
                       <td className="px-6 py-2 font-medium">
                         {request.request}
                       </td>
-                      <td className="px-6 py-2 font-medium">
-                        {request.by}
-                      </td>
+                      <td className="px-6 py-2 font-medium">{request.by}</td>
                       <td className="px-6 py-2 font-medium text-center">
                         <button
                           onClick={() => handleAccept(request.id)}
@@ -128,7 +144,6 @@ const Requests: React.FC = () => {
                           Decline
                         </button>
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
@@ -161,12 +176,12 @@ const Requests: React.FC = () => {
                       <td className="px-6 py-2 font-medium">
                         {request.request}
                       </td>
-                      <td className="px-6 py-2 font-medium">
-                        {request.by}
-                      </td>
+                      <td className="px-6 py-2 font-medium">{request.by}</td>
                       <td className="px-6 py-2 font-medium">
                         {request.action}
-                        {request.action === "Declined" ? ` - ${request.remark}` : ''}
+                        {request.action === "Declined"
+                          ? ` - ${request.remark}`
+                          : ""}
                       </td>
                     </tr>
                   ))}
@@ -185,4 +200,4 @@ const Requests: React.FC = () => {
   );
 };
 
-export default withAuth(Requests)
+export default withAuth(Requests);

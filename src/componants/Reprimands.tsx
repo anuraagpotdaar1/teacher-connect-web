@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import { doc, collection, updateDoc, arrayUnion, onSnapshot } from 'firebase/firestore';
+import {
+  doc,
+  collection,
+  updateDoc,
+  arrayUnion,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 interface ReprimandsProps {
@@ -9,7 +15,11 @@ interface ReprimandsProps {
   docId: string | null;
 }
 
-const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, docId }) => {
+const Reprimands: React.FC<ReprimandsProps> = ({
+  isOpen,
+  setIsReprimandsOpen,
+  docId,
+}) => {
   const [newReprimand, setNewReprimand] = useState("");
   const [reprimands, setReprimands] = useState<any[]>([]);
 
@@ -55,14 +65,22 @@ const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, do
         <div className="bg-white rounded-md p-8 mx-auto border border-gray-100 overflow-y-auto relative z-20 w-full max-w-4xl">
           <Dialog.Title className="text-2xl font-bold">Reprimands</Dialog.Title>
           <dl className="mt-2 divide-y divide-gray-100 max-h-60 overflow-y-scroll">
-            {reprimands.slice().reverse().map((reprimand, index) => (
-              <div key={index} className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  {new Date(reprimand.timestamp).toLocaleString()}
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{reprimand.remark}</dd>
-              </div>
-            ))}
+            {reprimands
+              .slice()
+              .reverse()
+              .map((reprimand, index) => (
+                <div
+                  key={index}
+                  className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+                >
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    {new Date(reprimand.timestamp).toLocaleString()}
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {reprimand.remark}
+                  </dd>
+                </div>
+              ))}
           </dl>
           <form onSubmit={submitReprimand}>
             <input
@@ -94,4 +112,4 @@ const Reprimands: React.FC<ReprimandsProps> = ({ isOpen, setIsReprimandsOpen, do
   );
 };
 
-export default Reprimands
+export default Reprimands;

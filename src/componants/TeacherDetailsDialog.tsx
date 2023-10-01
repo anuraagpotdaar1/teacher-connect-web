@@ -1,35 +1,37 @@
-import { Dialog } from '@headlessui/react';
-import { DataType } from '../pages/home';
-import Reprimands from './Reprimands';
-import Tasks from './Tasks';
-import _ from 'lodash';
-import { useState } from 'react';
-import Attendance from './AttentanceReport';
+import { Dialog } from "@headlessui/react";
+import { DataType } from "../pages/home";
+import Reprimands from "./Reprimands";
+import Tasks from "./Tasks";
+import _ from "lodash";
+import { useState } from "react";
+import Attendance from "./AttentanceReport";
 
 const detailsList = [
-  { title: "Overall behaviour", value: 'Prev_postings.behaviour' },
-  { title: "Current school name", value: 'Prev_postings.institute_name_1' },
-  { title: "Current post", value: 'Prev_postings.post_1' },
-  { title: "Subject", value: 'Prev_postings.subject_1' },
-  { title: "Contact number", value: 'Contact_details.cno' },
-  { title: "Email id", value: 'Contact_details.email' },
-  { title: "Emergency contact number", value: 'Contact_details.emergency_cno' },
-  { title: "Address", value: 'Contact_details.address' },
-  { title: "Blood group", value: 'Personal_details.blood_group' },
-  { title: "Gender", value: 'Personal_details.gender' },
-  { title: "Religion", value: 'Personal_details.religion' },
-  { title: "Caste", value: 'Personal_details.caste' },
-  { title: "Is disabled", value: 'Personal_details.disability' },
-  { title: "Date of birth", value: 'Personal_details.dob' },
-  { title: "Personal identification mark", value: 'Personal_details.id_mark' },
-  { title: "Marital status", value: 'Personal_details.marital_status' },
-  { title: "Current salary", value: 'Prev_postings.ending_salary_1' },
+  { title: "Overall behaviour", value: "Prev_postings.behaviour" },
+  { title: "Current school name", value: "Prev_postings.institute_name_1" },
+  { title: "Current post", value: "Prev_postings.post_1" },
+  { title: "Subject", value: "Prev_postings.subject_1" },
+  { title: "Contact number", value: "Contact_details.cno" },
+  { title: "Email id", value: "Contact_details.email" },
+  { title: "Emergency contact number", value: "Contact_details.emergency_cno" },
+  { title: "Address", value: "Contact_details.address" },
+  { title: "Blood group", value: "Personal_details.blood_group" },
+  { title: "Gender", value: "Personal_details.gender" },
+  { title: "Religion", value: "Personal_details.religion" },
+  { title: "Caste", value: "Personal_details.caste" },
+  { title: "Is disabled", value: "Personal_details.disability" },
+  { title: "Date of birth", value: "Personal_details.dob" },
+  { title: "Personal identification mark", value: "Personal_details.id_mark" },
+  { title: "Marital status", value: "Personal_details.marital_status" },
+  { title: "Current salary", value: "Prev_postings.ending_salary_1" },
 ];
 
 const openServiceBook = () => {
-  const url = "https://drive.google.com/file/d/1kWlWJ9kfK2C2UYEcIrvu2kEoybXXUzwg/view";
+  const url =
+    "https://drive.google.com/file/d/1kWlWJ9kfK2C2UYEcIrvu2kEoybXXUzwg/view";
   const windowName = "Popup";
-  const windowFeatures = "width=600, height=1000, left=100, top=100, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes";
+  const windowFeatures =
+    "width=600, height=1000, left=100, top=100, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes";
   window.open(url, windowName, windowFeatures);
 };
 
@@ -39,7 +41,11 @@ interface TeacherDetailsDialogProps {
   selectedData: DataType | null;
 }
 
-const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen, setIsModalOpen, selectedData }) => {
+const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({
+  isModalOpen,
+  setIsModalOpen,
+  selectedData,
+}) => {
   const [isReprimandsOpen, setIsReprimandsOpen] = useState(false);
   const [isTasksOpen, setIsTasksOpen] = useState(false);
   const [isAttendanceOpen, setIsAttendanceOpen] = useState(false);
@@ -59,7 +65,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
             {_.get(selectedData, "Personal_details.surname")}&apos;s digital
             service book
           </Dialog.Title>
-          <hr className='my-4' />
+          <hr className="my-4" />
           {selectedData && (
             <dl className="divide-y divide-gray-100">
               {detailsList.map((item, index) => (
@@ -77,7 +83,7 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
               ))}
             </dl>
           )}
-          <div className='mt-6 flex flex-auto gap-4 flex-row-reverse font-semibold'>
+          <div className="mt-6 flex flex-auto gap-4 flex-row-reverse font-semibold">
             <button
               className="bg-red-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
               onClick={() => setIsModalOpen(false)}
@@ -126,7 +132,6 @@ const TeacherDetailsDialog: React.FC<TeacherDetailsDialogProps> = ({ isModalOpen
         setIsAttendanceOpen={setIsAttendanceOpen}
         docId={selectedData?.docId ?? null}
       />
-
     </Dialog>
   );
 };
